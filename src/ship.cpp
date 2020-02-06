@@ -5,9 +5,11 @@ Ship::Ship()
 
 }
 
-Ship::Ship(int health, Direct direct): 
-    m_health(health), 
-    m_direct(direct)
+Ship::Ship(uint16_t health, Location location, Direction direction, Player player) : 
+    m_health(health),
+    m_location(location), 
+    m_direction(direction),
+    m_player(player)
 {
 
 }

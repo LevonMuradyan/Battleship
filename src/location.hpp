@@ -1,34 +1,23 @@
 #ifndef LOCATION_HPP
 #define LOCATION_HPP
 
-/**
-@file location.hpp
-@author XCOM
-@brief class location
-*/
-
-/**
-@class Location
-@brief x, y locations for ships
-*/
-
 class Location {
-///private members
-private:
-    int x;
-    int y;
-///constructor
 public:
-    /**
-    @brief Location constructor
-    */
-    Location(int x, int y);
-///public methods
-public:
-    void setX();
-    int getX() const;
-    void setY();
-    int getY() const;
+	Location();
+	Location(int x_, int y_);
+	Location(const Location& other);
+	~Location();
+
+	double distance(const Location& other) const;
+
+	int get_x() const;
+	int get_y() const;
+	void set_x(int x);
+	void set_y(int y);
+
+private: 
+	int m_x;
+	int m_y;
 };
 
-#endif ///LOCATION_HPP
+#endif // LOCATION_HPP

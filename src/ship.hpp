@@ -1,31 +1,41 @@
 #ifndef SHIP_HPP
 #define SHIP_HPP
 
+#include "utils.hpp"
+#include "location.hpp"
+#include "player.hpp"
 /**
 @file ship.hpp
-@author XCOM
+@author Levon Muradyan
 @brief Battleship game ships class
 */
 
-
-enum Direct {
-    HORIZONTAL,
-    VERTICAL
-};
 
 /**
 @class Ship
 */
 
 class Ship {
-private:
-    int m_health;
-    Direct m_direct;    
-public:
-    Ship();
-    Ship(int, Direct);
-    virtual ~Ship();
-    bool isDead();     
+    private:
+        // Number from [0..4] where 0 is dead.
+        uint16_t m_health;
+
+        // Where does current shi[] stand?
+	    Location m_location;
+
+	    // Which direction does he face?
+	    Direction m_direction; 
+
+        // Ships knows to which player it belongs.
+	    Player m_player;
+    public:
+        Ship();
+        Ship(uint16_t, 
+            Location,
+            Direction,
+            Player);
+        virtual ~Ship();
+        bool isDead();     
         
 };
 
