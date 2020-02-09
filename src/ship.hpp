@@ -3,7 +3,7 @@
 
 #include "utils.hpp"
 #include "location.hpp"
-#include "player.hpp"
+#include "object.hpp"
 /**
 @file ship.hpp
 @author Levon Muradyan
@@ -15,28 +15,18 @@
 @class Ship
 */
 
-class Ship {
+class Ship : public Object {
     private:
         // Number from [0..4] where 0 is dead.
-        uint16_t m_health;
-
-        // Where does current shi[] stand?
-	    Location m_location;
-
-	    // Which direction does he face?
-	    Direction m_direction; 
-
-        // Ships knows to which player it belongs.
-	    Player m_player;
+        size_t m_health = 0;
+        std::string m_image = " ";
     public:
         Ship();
-        Ship(uint16_t, 
-            Location,
-            Direction,
-            Player);
+        Ship(size_t, std::string);
         virtual ~Ship();
         bool isDead();     
-        
+        std::string get_image() override;
+        virtual size_t get_health();
 };
 
 #endif // SHIP_HPP 

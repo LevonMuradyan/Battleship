@@ -2,20 +2,27 @@
 #define BOARD_HPP
 
 #include <string>
+#include <vector>
+#include "object.hpp"
+#include "utils.hpp"
+#include "location.hpp"
+#include "ship.hpp"
 
 class Board {
+    public:
+        using Matrix = std::vector<std::vector<Object*>>;
     private:
-        std::string** my_board;
-        std::string** enemy_board;
+        Matrix m_board;
+        Object* m_obj;
     public:
         Board();
-        //Board(std::string **, std::string **);
-        //Board(const Board&);
-        //~Board();
-        //Board& operator=(const Board&);
-        void drawBoard();
-        std::string** get_my_board();
-        std::string** get_enemy_board();
+        Board(const Board&);
+        ~Board();
+        Board& operator=(const Board&);
+        Matrix get_board() const;
+        Object* get_obj() const;
+        void set_ship();
+
 };
 
 #endif // BOARD_HPP

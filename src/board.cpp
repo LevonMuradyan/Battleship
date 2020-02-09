@@ -1,103 +1,122 @@
 #include "board.hpp"
+#include "water.hpp"
 #include <iostream>
+#include "internship.hpp"
+#include "juniorship.hpp"
+#include "middleship.hpp"
+#include "seniorship.hpp"
+#include "utils.hpp"
 
 Board::Board() {
-    std::string** my_board = new std::string*[10];
-    std::string** enemy_board = new std::string*[10];
-    for (size_t i = 0; i < 10; ++i) {
-        my_board[i] = new std::string[10];
-        enemy_board[i] = new std::string[10];
-    }
+    m_board = Matrix(10, std::vector<Object*>(10));
+    m_obj = new Water();
+
     for (size_t i = 0; i < 10; ++i) {
         for (size_t j = 0; j < 10; ++j) {
-            my_board[i][j] = "*";
-            enemy_board[i][j] = "#";
+            m_board[i][j] = m_obj;
         }
     }        
 }
 
-/*Board::Board(std::string** my, std::string** enemy) {
-    my_board = my;
-    enemy_board = enemy;
-    for(int i = 0; i < 10; ++i) {
-        my_board[i] = my[i];
-        enemy_board[i] = enemy[i];
-    }
-}*/
 
-/*Board::Board(const Board& other) {
+Board::Board(const Board& other) {
+    m_obj = other.m_obj;
     for (size_t i = 0; i < 10; ++i) {
         for (size_t j = 0; j < 10; ++j) {
-            my_board[i][j] = other.my_board[i][j];
-            enemy_board[i][j] = other.enemy_board[i][j];
+            m_board[i][j] = other.m_board[i][j];
         }
     } 
-}*/
+}
 
-/*Board::~Board() {
-    for (int i = 0; i < 10; ++i) {
-        delete [] my_board[i];
-    }
-    delete [] my_board;
+Board::~Board() {
+    delete m_obj;
+}
 
-    for (int i = 0; i < 10; ++i) {
-        delete [] enemy_board[i];
-    }
-    delete [] enemy_board;
-}*/
-
-/*Board& Board::operator=(const Board& other) {
+Board& Board::operator=(const Board& other) {
+    delete m_obj;
+    m_obj = other.m_obj;
     for (size_t i = 0; i < 10; ++i) {
         for (size_t j = 0; j < 10; ++j) {
-            my_board[i][j] = other.my_board[i][j];
-            enemy_board[i][j] = other.enemy_board[i][j];
+            m_board[i][j] = other.m_board[i][j];
         }
     }
     return (*this); 
-}*/
+}
 
-void Board::drawBoard()
-{
-     std::cout << (
-            " ______     ______     ______   ______   __         ______     ______     __  __     __     ______  \n"
-                    "/\\  == \\   /\\  __ \\   /\\__  _\\ /\\__  _\\ /\\ \\       /\\  ___\\   /\\  ___\\   /\\ \\_\\ \\   /\\ \\   /\\  == \\ \n"
-                    "\\ \\  __<   \\ \\  __ \\  \\/_/\\ \\/ \\/_/\\ \\/ \\ \\ \\____  \\ \\  __\\   \\ \\___  \\  \\ \\  __ \\  \\ \\ \\  \\ \\  _-/ \n"
-                    " \\ \\_____\\  \\ \\_\\ \\_\\    \\ \\_\\    \\ \\_\\  \\ \\_____\\  \\ \\_____\\  \\/\\_____\\  \\ \\_\\ \\_\\  \\ \\_\\  \\ \\_\\   \n"
-                    "  \\/_____/   \\/_/\\/_/     \\/_/     \\/_/   \\/_____/   \\/_____/   \\/_____/   \\/_/\\/_/   \\/_/   \\/_/   \n"
-                    "                                                                                                    \n");
+Board::Matrix Board::get_board() const {
+    return m_board;
+}
+
+Object* Board::get_obj() const {
+    return m_obj;
+}
+
+void Board::set_ship() {
+    std::cout << "\n\nChoose Ship" << std::endl;
+    std::cout << "1: one block ship" << std::endl;
+    std::cout << "2: two block ship" << std::endl;
+    std::cout << "3: three block ship" << std::endl;
+    std::cout << "4: four block ship" << std::endl;
+    int ship_number;
+    std::cout << "\nEnter your number =  ";
+    std::cin >> ship_number;
+
+    Ship* ship = nullptr;
+    switch (ship_number) {
+        case 1:
+            ship = new InternShip();
+            break;
+        case 2:
+            ship = new JuniorShip();
+            break;
+        case 3:
+            ship = new MiddleShip();
+            break;
+        case 4:
+            ship = new SeniorShip();
+            break;
+        default:
+            std::runtime_error("Invalid Input");
+            
+    }
+
+    std::cout << "\nEnter Location =  ";
+    int x, y;
+    std::cin >> x >> y;
+    Location location(x, y);
+
+    std::cout << "\nChoose Direction" << std::endl;
+    std::cout << "1: Horizontal" << std::endl;
+    std::cout << "2: Vertical" << std::endl;
+    int direction_number;
+
+    std::cout << "\nEnter your number =  ";
+    std::cin >> direction_number;
+    std::cout << std::endl;
+
+    Direction direction;
+    switch (direction_number) {
+    case 1:
+        direction = Direction(HORIZONTAL);
+        break;
+    case 2:
+        direction = Direction(VERTICAL);
+        break;
+    default:
+        std::runtime_error("Invalid input");
+    }
 
 
-    std::cout << "         A   B   C   D   E   F   G   H   I   J " 
-              << "          A   B   C   D   E   F   G   H   I   J " << std::endl;
-    std::cout << "       +---+---+---+---+---+---+---+---+---+---+" 
-              << "       +---+---+---+---+---+---+---+---+---+---+" << std::endl;
-    
-    //std::cout << my_board[1][3] << std::endl;
-
-    for ( size_t i = 0; i < 10; ++i ){
-
-	    std::cout << "     " << i << " |";
-        for ( size_t j = 0; j < 10; ++j ) { 
-            //std::string s = my_board[i][j];
-            std::cout << " " << " " << " |";
+       
+    for (size_t i = 0; i < ship->get_health(); ++i) {
+        if (direction == HORIZONTAL) {
+            m_board[location.get_x()][location.get_y() + i] = ship;
         }
-
-        std::cout << "     " << i << " |";
-        for ( size_t j = 0; j < 10; ++j ) {
-            std::cout << " " << " " << " |";
+        else if (direction == VERTICAL) {
+            m_board[location.get_x() + i][location.get_y()] = ship;
         }
-        
-        std::cout << std::endl;
-        std::cout << "       +---+---+---+---+---+---+---+---+---+---+" 
-              << "       +---+---+---+---+---+---+---+---+---+---+" << std::endl;
+        else {
+            throw std::runtime_error("Invalid Direction");
+        }
     }
 }
-
-std::string** Board::get_my_board() {
-    return my_board;
-}
-
-std::string** Board::get_enemy_board() {
-    return enemy_board;
-}
-

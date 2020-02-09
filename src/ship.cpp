@@ -5,11 +5,9 @@ Ship::Ship()
 
 }
 
-Ship::Ship(uint16_t health, Location location, Direction direction, Player player) : 
-    m_health(health),
-    m_location(location), 
-    m_direction(direction),
-    m_player(player)
+Ship::Ship(size_t health, std::string image) : 
+        m_health(health), 
+        m_image(image) 
 {
 
 }
@@ -24,4 +22,12 @@ bool Ship::isDead()
     if (0 == m_health)
         return true;
     return false;    
+}
+
+std::string Ship::get_image() { 
+    return m_image; 
+}
+
+size_t Ship::get_health() { 
+    return m_health; 
 }

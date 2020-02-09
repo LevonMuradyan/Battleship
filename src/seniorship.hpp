@@ -8,6 +8,8 @@ class SeniorShip : public Ship {
     public:
         SeniorShip();
         ~SeniorShip() override;
+        std::string get_image() override;
+        size_t get_health() override;
 
 };
 
