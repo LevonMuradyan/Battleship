@@ -1,0 +1,3 @@
+obj/juniorship.dep  obj/juniorship.o: src/juniorship.cpp \
+ src/juniorship.hpp src/ship.hpp src/utils.hpp src/location.hpp \
+ src/object.hpp

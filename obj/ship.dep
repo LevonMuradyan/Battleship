@@ -1,0 +1,2 @@
+obj/ship.dep  obj/ship.o: src/ship.cpp src/ship.hpp src/utils.hpp \
+ src/location.hpp src/object.hpp

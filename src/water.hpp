@@ -6,7 +6,7 @@
 
 class Water : public Object {
 private:
-    std::string m_image = " ";
+    std::string m_image = "  ";
 public:
     Water() {};
     ~Water() {};

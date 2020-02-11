@@ -3,6 +3,7 @@
 #include "middleship.hpp"
 #include "seniorship.hpp"
 #include "board.hpp"
+#include "water.hpp"
 #include <iostream>
 
 #include <stdlib.h>
@@ -19,10 +20,10 @@ void draw_boards(const Board& my_board, const Board& enemy_board)
         "                                                                                                    \n");
 
 
-    std::cout << "         A   B   C   D   E   F   G   H   I   J "
-        << "          A   B   C   D   E   F   G   H   I   J " << std::endl;
-    std::cout << "       +---+---+---+---+---+---+---+---+---+---+"
-        << "       +---+---+---+---+---+---+---+---+---+---+" << std::endl;
+    std::cout << "          A    B    C    D    E    F    G    H    I    J "
+        << "           A    B    C    D    E    F    G    H    I    J " << std::endl;
+    std::cout << "       +----+----+----+----+----+----+----+----+----+----+"
+        << "       +----+----+----+----+----+----+----+----+----+----+" << std::endl;
 
     //std::cout << my_board[1][3] << std::endl;
 
@@ -40,8 +41,8 @@ void draw_boards(const Board& my_board, const Board& enemy_board)
         }
 
         std::cout << std::endl;
-        std::cout << "       +---+---+---+---+---+---+---+---+---+---+"
-            << "       +---+---+---+---+---+---+---+---+---+---+" << std::endl;
+        std::cout << "       +----+----+----+----+----+----+----+----+----+----+"
+            << "       +----+----+----+----+----+----+----+----+----+----+" << std::endl;
     }
 
 
@@ -51,6 +52,7 @@ int main() {
 
     Board my_board;
     Board enemy_board;
+    Water water;
 
     draw_boards(my_board, enemy_board);
     for (int i = 0; i < 10; ++i) {

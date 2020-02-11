@@ -1,7 +1,7 @@
 #include "middleship.hpp"
 
 MiddleShip::MiddleShip() :
-    Ship(3, "$")
+    Ship(3, "🛳 ")
 {
 
 }

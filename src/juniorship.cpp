@@ -1,6 +1,6 @@
 #include "juniorship.hpp"
 
-JuniorShip::JuniorShip() : Ship(2, "#")
+JuniorShip::JuniorShip() : Ship(2, "🚤")
 {
 
 }

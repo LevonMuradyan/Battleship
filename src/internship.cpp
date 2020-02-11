@@ -1,7 +1,7 @@
 #include "internship.hpp"
 
 InternShip::InternShip() :
-    Ship(1, "*")
+    Ship(1, "⛵")
 {
 
 }

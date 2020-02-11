@@ -7,6 +7,7 @@
 #include "seniorship.hpp"
 #include "utils.hpp"
 
+
 Board::Board() {
     m_board = Matrix(10, std::vector<Object*>(10));
     m_obj = new Water();
@@ -52,37 +53,94 @@ Object* Board::get_obj() const {
 }
 
 void Board::set_ship() {
-    std::cout << "\n\nChoose Ship" << std::endl;
-    std::cout << "1: one block ship" << std::endl;
-    std::cout << "2: two block ship" << std::endl;
-    std::cout << "3: three block ship" << std::endl;
-    std::cout << "4: four block ship" << std::endl;
+    
     int ship_number;
-    std::cout << "\nEnter your number =  ";
-    std::cin >> ship_number;
-
     Ship* ship = nullptr;
-    switch (ship_number) {
-        case 1:
-            ship = new InternShip();
-            break;
-        case 2:
-            ship = new JuniorShip();
-            break;
-        case 3:
-            ship = new MiddleShip();
-            break;
-        case 4:
-            ship = new SeniorShip();
-            break;
-        default:
-            std::runtime_error("Invalid Input");
-            
+
+    while(true) {
+
+
+        std::cout << "\n\nChoose Ship" << std::endl;
+        if(1) {
+            std::cout << "1: One-Block-Ship" << std::endl;
+        }
+        if(1) {
+            std::cout << "2: Two-Block-Ship" << std::endl;
+        }
+        if(1) {
+            std::cout << "3: Three-Block-Ship" << std::endl;
+        }
+        if(1) {
+            std::cout << "4: Four-Block-Ship" << std::endl;
+        }    
+    
+        std::cout << "\nEnter your number =  ";
+        std::cin >> ship_number;
+
+        if(ship_number == 1 ) {
+            std::cout << "You can only create 4 times One-Block-Ship " << std::endl;
+            //continue;
+        }
+        if(ship_number == 2 ) {
+            std::cout << "You can only create 3 times Two-Block-Ship " << std::endl;
+            //continue;
+        }
+        if(ship_number == 3 ) {
+            std::cout << "You can only create 2 times Three-Block-Ship " << std::endl;
+            //continue;
+        }
+        if(ship_number == 4 ) {
+            std::cout << "You can only create 1 time Four-Block-Ship " << std::endl;
+            //continue;
+        }
+
+        if(ship_number < 1 || ship_number > 4) {
+            std::cout << "Please, write number between 1-4" << std::endl;
+            std::cin.clear();
+            continue;
+        }
+        
+        switch (ship_number) {
+            case 1:
+                ship = new InternShip();
+                break;
+            case 2:
+                ship = new JuniorShip();
+                break;
+            case 3:
+                ship = new MiddleShip();
+                break;
+            case 4:
+                ship = new SeniorShip();
+                break;               
+        }
+        break;
     }
 
-    std::cout << "\nEnter Location =  ";
-    int x, y;
-    std::cin >> x >> y;
+    int x;
+    char y; 
+    while(true) {
+        std::cout << "\nEnter Location =  ";
+        std::cin >> x >> y;
+        y = static_cast<int>(y);
+
+        bool lower = (y >= 'a' && y <= 'j');
+        bool upper = (y >= 'A' && y <= 'J');
+        bool digit_y = (y >= '0' && y <= '9'); 
+        bool digit_x = (x >= 0 && x <= 9);   
+
+        if(!lower && !upper && !digit_y || !digit_x) {
+
+            std::cin.clear();
+            std::cout << "Please, enter valid coordinates!\n";
+            
+        }
+        else {
+            y -= !lower? !upper? !digit_y? : 48 : 65 : 97;
+            break; 
+        }
+    }
+
     Location location(x, y);
 
     std::cout << "\nChoose Direction" << std::endl;

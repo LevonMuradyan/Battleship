@@ -14,6 +14,7 @@ class Board {
     private:
         Matrix m_board;
         Object* m_obj;
+
     public:
         Board();
         Board(const Board&);
