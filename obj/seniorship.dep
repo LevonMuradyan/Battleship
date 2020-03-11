@@ -1,3 +1,0 @@
-obj/seniorship.dep  obj/seniorship.o: src/seniorship.cpp \
- src/seniorship.hpp src/ship.hpp src/utils.hpp src/location.hpp \
- src/object.hpp

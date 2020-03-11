@@ -1,4 +1,0 @@
-obj/board.dep  obj/board.o: src/board.cpp src/board.hpp src/object.hpp \
- src/utils.hpp src/location.hpp src/ship.hpp src/water.hpp \
- src/internship.hpp src/juniorship.hpp src/middleship.hpp \
- src/seniorship.hpp

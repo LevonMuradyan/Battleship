@@ -1,1 +1,0 @@
-obj/player.dep  obj/player.o: src/player.cpp src/player.hpp src/utils.hpp

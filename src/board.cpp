@@ -5,7 +5,6 @@
 #include "juniorship.hpp"
 #include "middleship.hpp"
 #include "seniorship.hpp"
-#include "utils.hpp"
 
 
 Board::Board() {
@@ -176,5 +175,91 @@ void Board::set_ship() {
         else {
             throw std::runtime_error("Invalid Direction");
         }
+    }
+}
+
+bool Board::check_position(int x, int y, int ship_size, Direction direction) {
+    int row_begin = -1;
+    int col_begin = -1;
+    int row_end = 1;
+    int col_end = 1;
+    if(x == 0) { row_begin = 0; }
+    if(y == 0) { col_begin = 0; }
+    if(x == 9) { row_end = 0; }
+    if(y == 9) { col_end = 0; }  
+    
+    if(direction == VERTICAL) {
+        row_end += (ship_size - 1);    
+    }
+    if(direction == HORIZONTAL) {
+        col_end += (ship_size - 1); 
+    }
+
+    if(row_end + x > 10 || col_end + y > 10) { 
+        return false;
+    }
+
+    if(row_end + x == 10) {
+            --row_end;
+    }
+    if(col_end + y == 10) {
+            --col_end;
+    }
+    for(int i = row_begin; i <= row_end ; ++i) {
+        for(int j = col_begin; j <= col_end; ++j) {
+            if(m_board[x + i][y + j] != m_obj) {
+                return false;
+            }
+        }
+    }
+    return true; 
+}
+
+void Board::set_random_ships() {
+    int ship_number;
+    for(int k = 0; k < 10; ++k){
+
+        if(k == 0) { ship_number = 4; } 
+        else if(k > 0 && k < 3) { ship_number = 3; }
+        else if(k > 2 && k < 6) { ship_number = 2; }
+        else { ship_number = 1; }
+
+        while(true) {
+
+            int x = rand() % 10;
+            int y = rand() % 10;
+            Direction direction = get_random_direction();
+            Ship* ship = nullptr;
+
+            if(check_position(x, y, ship_number, direction)) {
+                switch(ship_number) {
+                    case 4:
+                        ship = new SeniorShip();
+                        break;
+                    case 3:
+                        ship = new MiddleShip();
+                        break;
+                    case 2:
+                        ship = new JuniorShip();
+                        break;
+                    case 1:
+                        ship = new InternShip();
+                        break;
+                }
+                
+                for (size_t i = 0; i < ship_number; ++i) {
+                    if (direction == HORIZONTAL) {
+                        m_board[x][y + i] = ship;
+                    }
+                    else if (direction == VERTICAL) {
+                        m_board[x + i][y] = ship;
+                    }
+                    else {
+                        throw std::runtime_error("Invalid Direction");
+                    }
+                }
+                break;
+            }
+        }          
     }
 }

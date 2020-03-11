@@ -1,3 +1,0 @@
-obj/main.dep  obj/main.o: src/main.cpp src/internship.hpp src/ship.hpp \
- src/utils.hpp src/location.hpp src/object.hpp src/juniorship.hpp \
- src/middleship.hpp src/seniorship.hpp src/board.hpp src/water.hpp

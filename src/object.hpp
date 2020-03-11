@@ -8,7 +8,7 @@ class Object {
 public:
     Object() {};
     ~Object() {};
-    virtual std::string get_image() { return "o"; };
+    virtual std::string get_image() = 0;
 };
 
 #endif // OBJECT_HPP

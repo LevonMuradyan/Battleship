@@ -1,3 +1,0 @@
-obj/middleship.dep  obj/middleship.o: src/middleship.cpp \
- src/middleship.hpp src/ship.hpp src/utils.hpp src/location.hpp \
- src/object.hpp
